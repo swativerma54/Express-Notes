@@ -1,0 +1,446 @@
+Notes :-
+
+Express :- 
+Express is Just like Express Way.
+Before holy, if rememeber we have made a Small mvc Based Architecture:-
+
+This Application was built on core:-
+**************************************
+here server was set up using core http module.
+config
+controller
+model
+view
+App.js
+index.js
+
+Keypoints of Express:-
+**********************
+
+1. its is fast 
+2. it is easy then core.
+3. more modular approach to code.
+4. you can manage code in more better way.
+5. it is framework of Node Js
+6. get and Post handle easy.
+
+Other Framework of  Node Js :-
+**************************
+1. Express
+2. Fastify
+3. Hapi
+4. Koa.js
+6. Next.Js
+
+Express Js Allows you to create project Itself:-
+***************************************************
+with different View Template Support.
+npx create-react-app  similary
+npx express with --view=ejs or pug or handlebar <app-name>
+
+express :-
+1. express App generator : using this you can create Blank Project just like react Js.
+2. create express core from scratch :- 
+
+How to create Node-express App:-
+*********************************
+1. mkdir app-name
+2. cd app-name
+3. npm init -y
+4. open package.json 
+	Add dependency 
+   {
+     "dependencies" : {
+        "express": "latest"
+     }
+   }
+
+5. npm install.
+   directory node modules.
+6. index.js => server 
+
+Old Server Code:-
+*********************
+const http = require('http');
+const server = http.createServer((req,res)=>{
+
+res.writeHead(200,{
+ "Content-Type":"application/json"
+});
+
+
+});
+
+server.listen(8080,()=>{
+   console.log('server started');
+})
+
+express server :-
+const express = require('express'); //module or package or framework
+const app = express();
+
+app.listen(8080,()=>{
+	   console.log('server started');
+});
+
+app.get('/',(req,res)=>{
+
+res.write("Hello from express");
+res.end();
+
+})
+
+
+Our Requirement is to create full functional application :-
+Project structure:-
+1. config
+2. controller
+3. model
+4. view
+5. public
+6. routes
+7. index.js
+8. package.json
+9. package-lock.json
+
+  Next step:- Add dependencies
+   {
+     "dependencies":{
+      "express":latest
+
+
+adding hot reloading:-
+
+using nodemon:-
+
+local server with autoreloading feature
+
+nodemon install
+
+1.locally
+  npm install nodemon
+  
+  or
+
+
+
+
+2. Globally
+ 
+ npm install --global nodemon
+ nodemon.cmd
+ nodemon.bat
+ global path.
+
+npx nodemon index.js => server start
+nodemon index.js
+
+in order ton run using npm:-
+
+locally
+1. open package.json
+{ 
+   "scripts":{
+     "test":"node test for Error",
+      "start";"node ./node_modules/nodemon/bin/nodemon.js index.js"
+     }
+ }
+
+Globally
+ 1. open package.json
+   {
+      "scripts":{
+        "test":"node test for Error",
+         "start":"node nodemon index.js"
+        }
+}
+
+ index.js:-
+  const express= require('express');
+  const app = express();
+  const port = process.env.PORT || '8080';
+  
+  app.listen(PORT,()=>{
+  console.log(` server was started at port = ${port}`);
+})
+
+ MVC updated version:-
+**********************
+const http = require('http'); 
+const server=http.createServer();
+const port = process.env.PORT || '8080';
+server.listen(port,()=>{
+    console.log(`server was started at port = ${port}`);
+});
+
+app.js:-
+*********
+
+const express = require('express');
+const app = express();
+module.exports=app;
+
+require the app.js
+
+index.js or server.js
+**********************
+const http = require('http');
+const app = require('./app');
+
+const server = http.createSever (app);
+ const port = process.env.PORT||'8080';
+server.listen(port,()=>{
+ console.log(`server was started at port =${port}`);
+});
+
+All Endpoints, in API and URL for get,post,put,patch,delete are managed by routes....
+
+  by default Routes:-
+ app.get('/xyz-url',(req,res)=>{
+ 
+  res.send('get url');
+});
+
+ app.post('/xyz-url',(req,res)=>{
+  res.send('get url');
+});
+     app.post('/xyz-url',(req,res)=>{
+  res.send('post url');
+});
+
+   Advanced Routing:-
+ ********************
+  express has inbuilt router
+
+  routes
+ ********
+  crud :student
+   get
+   post
+   put
+   delete
+
+  crud: userRoute.js
+   get => All user
+   post
+   put
+   delete
+   login => post + get
+   userVerification => user
+   forgetPassword = user
+   
+   module.export = router;
+  const router = express.Router();
+  router.get('/xyz-url',(req,res)=>{
+  res.send('get url');
+  });
+  
+ router.post('/xyz-url',(req,res)=>{
+ res.send('post url');
+ });
+
+ Connecting app.js with routes:-
+********************************
+1. app.js connect with router.
+
+  const studentRoute = require('./studentRoute');
+  const userRoute = require('./userRoute');
+
+  app.use('/student',studentRoute);
+  app.use('/users',userRoute);
+
+
+
+Control-Flow of Express Application or lifecycle of node & Express:-
+*******************************************************************
+
+npm ---> package.json ---> start ---> nodemon(not required in live server) -----> index.js
+index.js ----> config ----> app.js ----> use Middleware ----> router ----> controller.....
+
+
+
+Adding page to the Node Application
+************************************
+
+Till now we are able to create , index.js , app.js, routes and controller in the node Application..
+But our Node Application may require static pages to be created.
+for this we can make a pages or static folder in project..
+
+Project Structure :-
+******************
+
+1.Config
+2.controller
+3.model
+4.view
+5.public
+6.routes
+7.index.js
+8.package.json
+9.package-lock.json
+10.pages<-------------This is pages folder (or static)
+      |------------> index.html
+      |------------> about.html
+      |------------> contact.html
+      |------------> register.html
+       .....
+       .......n
+
+       here we can make static folder name also
+       Note :: All the pages will be loaded in GET Request..    
+
+   How to load pages in Node Js:-
+  *******************************
+   const path = require('path');
+  
+   router.get('/home',function (res,req,next){
+   
+       let pagename = path.join(_dirname,"/pages/index.html");
+            res.sendFile(pagename);
+  
+         });
+
+       Sending 404 page
+     **********************
+      fallback : fallback when response is ended without, expectation..
+      error.html
+       or
+       404.html
+            <h1>404 page not found </h1>
+            app.use('*',function(req,res,next){
+              
+             let pagename = path.join(_dirname,"/pages/404.html");
+              res.sendFile(pagename);
+     });
+
+      Adding controller to the application :-
+    *****************************************
+     controller :- It separate business logic from the application...
+                   It acts as middle man b/w model and view..
+                   controller takes the data from model return to the view and vice-versa... 
+
+
+         Three ways of writting the controller...
+         1.Normal function or Anonymous function to reference..
+         2.Factory function or Factory object (function as object)  
+         3.Using classes or Typescript
+
+       Normal function as a controller :-
+     ************************************
+     
+
+      router.get('/home',HomeController.create());
+                              |
+                              | 
+                              |
+                         import/require
+                              |
+                              |------->package.json----->"type":"module" or rename : .js to .mjs
+                              |
+                              |
+                              |--------> require ------> const HomeController = require('../Controller/HomeController');                              
+                              |
+                              |
+                              |
+                            module.exports = create;
+      function create(req,res,next){
+       //Business Logic...
+    }
+
+  2. Factory Function :-
+   
+    const : function(req,res,next){
+       
+          },
+         update : function(req,res,next){
+              //This is  Logic
+
+      },delete: function(req,res,next){
+           //This is logic
+        }
+    }
+  How to call :-
+  student.create();
+
+  How to export :-
+ module.export = Student;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
